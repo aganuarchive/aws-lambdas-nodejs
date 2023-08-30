@@ -4,7 +4,7 @@ phases :
     commands:
       - echo "Zipping lambda package for EntryReceipt"
       - cd EntryReceipt
-      - zip  ../genEntryReceipt.zip *.py
+      - zip  ../genEntryReceipt.zip *.*
       - pwd
       - ls
       - cd ..
