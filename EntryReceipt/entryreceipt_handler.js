@@ -1,4 +1,5 @@
 const AWS = require("aws-sdk" ) 
+const receipt = require("./receipt.js")
 
 module.exports.handler = async (event) => {
     // TODO implement
@@ -9,7 +10,7 @@ module.exports.handler = async (event) => {
     console.log("shopping") ;
     console.log(shopjson['items'][1] ) ;
     var shopstr = shopdoc ;
-    shopstr = formatStr(shopjson) ;
+    shopstr = receipt.formatStr(shopjson) ;
   
           const S3 = new AWS.S3() ;
           console.log("Before putobject 2") ;
