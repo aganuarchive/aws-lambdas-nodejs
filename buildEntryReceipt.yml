@@ -1,0 +1,16 @@
+version : 0.2
+phases :
+  build: 
+    commands:
+      - echo "Zipping lambda package for EntryReceipt"
+      - cd EntryReceipt
+      - zip  ../genEntryReceipt.zip *.py
+      - pwd
+      - ls
+      - cd ..
+      - pwd
+      - ls
+  post_build:
+    commands:
+      - aws lambda update-function-code --function-name genEntryReceipt --zip-file fileb://genEntryReceipt.zip  
+      - echo "Build Done!"
