@@ -2,22 +2,24 @@ const AWS = require("aws-sdk" )
 const receipt = require("./receipt.js")
 
 module.exports.handler = async (event) => {
-    // TODO implement
-    console.log(event) ;
-    var shopdoc = '{"shopping" : {"locationid" : 33, "shopdate" : "2019-03-03", "shopamount" : 3.3, "shopdiscount" : -1.1, "items" : [510,445,208] }}' ;
-    //var shopjson = JSON.parse(event['shopping']);
-    var shopjson = event['shopping'] ;
-    console.log("shopping") ;
-    console.log(shopjson['items'][1] ) ;
-    var shopstr = shopdoc ;
-    shopstr = receipt.formatStr(shopjson) ;
-  
+    console.log(event.body) ;
+    var tmps= event.body ;
+    console.log("input") ;
+    //var shopdoc = JSON.parse(tmps);
+    //console.log("shopdoc") ;
+    //console.log(shopdoc) ;
+    //var shopjson = shopdoc['shopping'] ;
+    //var shopstr = shopdoc ;
+    //shopstr = receipt.formatStr(shopjson) ;
+    var shopstr = receipt.formatStr(tmps) ;
+    var filename = receipt.formatTime() ;
+    console.log(filename) ;
           const S3 = new AWS.S3() ;
           console.log("Before putobject 2") ;
           const command = 
               {
               Bucket: "expjun23store",
-              Key: "hellos3main.txt",
+              Key: "Shopping-" + filename + ".txt",
               Body: shopstr,
               ContentType : "application/text"
           }
@@ -32,4 +34,5 @@ module.exports.handler = async (event) => {
     };
     return response;
   };
+  
   
