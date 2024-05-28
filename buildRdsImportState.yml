@@ -1,0 +1,16 @@
+version : 0.2
+phases :
+  build: 
+    commands:
+      - echo "Zipping lambda package for RdsImportState"
+      - cd rdsImportState
+      - zip  ../rdsImportState.zip *.*
+      - pwd
+      - ls
+      - cd ..
+      - pwd
+      - ls
+  post_build:
+    commands:
+      - aws lambda update-function-code --function-name rdsImportState --zip-file fileb://rdsImportState.zip  
+      - echo "Build Done!"
