@@ -3,7 +3,7 @@ phases :
   build: 
     commands:
       - echo "Zipping lambda package for RdsImportState"
-      - cd rdsImportState
+      - cd rdsimport
       - zip  ../rdsImportState.zip *.*
       - pwd
       - ls
