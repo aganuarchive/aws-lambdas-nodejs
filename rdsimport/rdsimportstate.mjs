@@ -7,7 +7,10 @@ export const handler = async (event) => {
   console.log("Dynamo DB straem change") ;
   console.log(event['Records'][0]['dynamodb']) ;
   if (event['Records'][0]['dynamodb']['Keys']['FLAGNAME']['S'] == 'RDSIMPORT') {
-    const oldstatus = event['Records'][0]['dynamodb']['OldImage']['STATUS']['S'] ;
+    let oldstatus = "*" ;
+    if ( 'OldImage' in event['Records'][0]['dynamodb'] ) {
+      oldstatus = event['Records'][0]['dynamodb']['OldImage']['STATUS']['S'] ;
+    } 
     const newstatus = event['Records'][0]['dynamodb']['NewImage']['STATUS']['S'] ;
     console.log("Old = " + oldstatus) ;
     console.log("New = " + newstatus) ;
