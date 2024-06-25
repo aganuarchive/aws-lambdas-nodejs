@@ -1,0 +1,16 @@
+version : 0.2
+phases :
+  build: 
+    commands:
+      - echo "Zipping lambda package for AwsResourceState"
+      - cd rdsimport
+      - zip  ../awsResourceState.zip *.*
+      - pwd
+      - ls
+      - cd ..
+      - pwd
+      - ls
+  post_build:
+    commands:
+      - aws lambda update-function-code --function-name awsResourceState --zip-file fileb://awsResourceState.zip  
+      - echo "Build Done!"
