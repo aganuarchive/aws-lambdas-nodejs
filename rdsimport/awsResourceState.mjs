@@ -12,10 +12,16 @@ export const handler = async (event) => {
     } 
     console.log("New = " + newstatus) ;
     if (newstatus == "PRV" ) {
-      message = "Resource provisioned."
+      message = "Resource " + event['Records'][0]['dynamodb']['NewImage']['RESOURCE-TYPE']['S'] + " ( " + 
+      event['Records'][0]['dynamodb']['NewImage']['RESOURCE-ARN']['S'] + " ) provisioned."
+    }
+    if (newstatus == "EXP" ) {
+      message = "Resource " + event['Records'][0]['dynamodb']['NewImage']['RESOURCE-TYPE']['S'] + " ( " + 
+      event['Records'][0]['dynamodb']['NewImage']['RESOURCE-ARN']['S'] + " ) expired."
     }
     if (newstatus == "TER" ) {
-      message = "Resource terminated."
+      message = "Resource " + event['Records'][0]['dynamodb']['NewImage']['RESOURCE-TYPE']['S'] + " ( " + 
+      event['Records'][0]['dynamodb']['NewImage']['RESOURCE-ARN']['S'] + " ) terminated."
     }
   const client = new SNSClient() ;
     const ilist = {} ;
